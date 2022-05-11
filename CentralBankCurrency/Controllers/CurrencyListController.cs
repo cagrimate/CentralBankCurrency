@@ -16,6 +16,8 @@ namespace CentralBankCurrency.Controllers
 
             XmlDocument doviz = new XmlDocument();
             doviz.Load("https://www.tcmb.gov.tr/kurlar/today.xml");
+
+
             var currencies = doviz.SelectNodes($"//Currency");
 
             foreach (XmlNode currenciesNode in currencies)
@@ -23,7 +25,6 @@ namespace CentralBankCurrency.Controllers
                 string kod = currenciesNode.Attributes["Kod"].Value;
                 string isim = currenciesNode.SelectSingleNode("Isim").InnerText;
                 currencyName.Add(new { Name = isim, Code = kod });
-
             }
             return currencyName;
         }
